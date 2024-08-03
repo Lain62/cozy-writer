@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Tauri stuff
+  //
+  // TAURI DEFAULTS DO NOT TOUCH
+  //
   // prevent vite from obscuring error
   clearScreen: false,
   // Tauri expects a fixed port, fail if that port is not available
@@ -20,7 +22,9 @@ export default defineConfig({
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
   },
+  //
+  // TAURI DEFAULTS ENDS
+  //
 
-  // Tauri stuff
   plugins: [react()],
 })
