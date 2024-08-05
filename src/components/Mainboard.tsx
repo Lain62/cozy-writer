@@ -1,9 +1,11 @@
 import Sidepanel from "./Sidepanel"
+import Maintext from "./Maintext"
 
 function Mainboard() {
-    return(
-        <main>
-            <Sidepanel/>
+    return (
+        <main className="flex">
+            <Sidepanel />
+            <Maintext />
         </main>
     )
 }
