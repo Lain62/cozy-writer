@@ -1,10 +1,12 @@
-import './App.css'
+import Navbar from "./components/Navbar"
+import Mainboard from "./components/Mainboard"
 
 function App() {
 
   return (
-    <div>
-      <h1 className='text-center w-full'>HELLO WORLD</h1>
+    <div className='bg-gray-800 w-screen h-screen flex flex-col'>
+      <Navbar />
+      <Mainboard />
     </div>
   )
 }
