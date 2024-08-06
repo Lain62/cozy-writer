@@ -6,15 +6,13 @@ function Maintext() {
     const [fontSize, setFontSize] = useState<any>(0);
     const getFontSize = async () => await invoke('get_font_size');
     const unlisten = async () => await listen('font_size_change', () => {
-        setChangeFontSize(true)
+        getFontSize().then(val => { setFontSize(val) });
     });
-    const [changeFontSize, setChangeFontSize] = useState(false)
 
     useEffect(() => {
-        getFontSize().then(val => { setFontSize(val); console.log(val) });
+        getFontSize().then(val => { setFontSize(val) });
         unlisten();
-        setChangeFontSize(false)
-    }, [changeFontSize])
+    }, [])
 
     return (
         <textarea style={{ fontSize: fontSize }} className=" p-2 w-3/4 h-[calc(100vh-2.5rem)] resize-none focus:border-none focus:outline-none bg-gray-900 text-white" />
