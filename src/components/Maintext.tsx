@@ -15,7 +15,7 @@ function Maintext() {
     }, [])
 
     return (
-        <textarea style={{ fontSize: fontSize }} className=" p-2 w-3/4 h-[calc(100vh-2.5rem)] resize-none focus:border-none focus:outline-none bg-gray-900 text-white" />
+        <textarea style={{ fontSize: fontSize }} className=" p-2 w-3/4 h-screen resize-none focus:border-none focus:outline-none bg-gray-900 text-white" />
     )
 }
 
