@@ -12,7 +12,14 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "fs": {
+        "all": true,
+        "scope": [
+          "$DOCUMENT/Cozy Writer",
+          "$DOCUMENT/Cozy Writer/*"
+        ]
+      }
     },
     "bundle": {
       "active": true,

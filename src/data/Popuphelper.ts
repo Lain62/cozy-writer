@@ -1,4 +1,5 @@
 export enum PopupWindowState {
-    None,
-    FontSettings
+  None,
+  FontSettings,
+  NewProject
 }
