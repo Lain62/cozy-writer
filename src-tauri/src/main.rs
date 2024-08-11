@@ -1,31 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::sync::Mutex;
-use tauri::{AppHandle, Manager, State, WindowMenuEvent};
+use tauri::{AppHandle, Manager, WindowMenuEvent};
 use tauri::{CustomMenuItem, Menu, Submenu};
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
     message: String,
-}
-
-struct Font {
-    size: Mutex<i32>,
-}
-
-#[tauri::command]
-fn set_font_size(app: AppHandle, state: State<Font>, size: i32) {
-    let mut counter = state.size.lock().unwrap();
-    *counter = size;
-
-    app.emit_all(
-        "font_change",
-        Payload {
-            message: "Font size changed!".into(),
-        },
-    )
-    .unwrap();
 }
 
 #[tauri::command]
@@ -37,42 +18,6 @@ fn close_popup(app: AppHandle) {
         },
     )
     .unwrap()
-}
-
-#[tauri::command]
-fn get_font_size(state: State<Font>) -> i32 {
-    let counter = state.size.lock().unwrap();
-    *counter
-}
-
-#[tauri::command]
-fn add_font_size(state: State<Font>, app: AppHandle) -> i32 {
-    let mut counter = state.size.lock().unwrap();
-    *counter += 1;
-
-    app.emit_all(
-        "font_change",
-        Payload {
-            message: "Font size changed!".into(),
-        },
-    )
-    .unwrap();
-    *counter
-}
-
-#[tauri::command]
-fn decrease_font_size(state: State<Font>, app: AppHandle) -> i32 {
-    let mut counter = state.size.lock().unwrap();
-    *counter -= 1;
-
-    app.emit_all(
-        "font_change",
-        Payload {
-            message: "Font size changed!".into(),
-        },
-    )
-    .unwrap();
-    *counter
 }
 
 fn init_menu() -> Menu {
@@ -115,14 +60,7 @@ fn main() {
     tauri::Builder::default()
         .menu(menu)
         .on_menu_event(|event| handle_menu_event(event))
-        .manage(Font {
-            size: Mutex::new(16),
-        })
         .invoke_handler(tauri::generate_handler![
-            get_font_size,
-            add_font_size,
-            decrease_font_size,
-            set_font_size,
             close_popup
         ])
         .run(tauri::generate_context!())
