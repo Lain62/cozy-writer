@@ -20,7 +20,7 @@ fn set_font_size(app: AppHandle, state: State<Font>, size: i32) {
     *counter = size;
 
     app.emit_all(
-        "font_size_change",
+        "font_change",
         Payload {
             message: "Font size changed!".into(),
         },
@@ -29,25 +29,14 @@ fn set_font_size(app: AppHandle, state: State<Font>, size: i32) {
 }
 
 #[tauri::command]
-fn close_new_project_window(app: AppHandle) {
+fn close_popup(app: AppHandle) {
     app.emit_all(
-        "close_new_project_window",
+        "close_popup",
         Payload {
-            message: "Closing new project window".into(),
+            message: "Closing popup".into()
         },
     )
-    .unwrap();
-}
-
-#[tauri::command]
-fn close_font_window(app: AppHandle) {
-    app.emit_all(
-        "close_font_window",
-        Payload {
-            message: "Closing font window".into(),
-        },
-    )
-    .unwrap();
+    .unwrap()
 }
 
 #[tauri::command]
@@ -62,7 +51,7 @@ fn add_font_size(state: State<Font>, app: AppHandle) -> i32 {
     *counter += 1;
 
     app.emit_all(
-        "font_size_change",
+        "font_change",
         Payload {
             message: "Font size changed!".into(),
         },
@@ -77,7 +66,7 @@ fn decrease_font_size(state: State<Font>, app: AppHandle) -> i32 {
     *counter -= 1;
 
     app.emit_all(
-        "font_size_change",
+        "font_change",
         Payload {
             message: "Font size changed!".into(),
         },
@@ -133,9 +122,8 @@ fn main() {
             get_font_size,
             add_font_size,
             decrease_font_size,
-            close_font_window,
             set_font_size,
-            close_new_project_window
+            close_popup
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

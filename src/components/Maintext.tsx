@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 function Maintext() {
     const [fontSize, setFontSize] = useState<any>(0);
     const getFontSize = async () => await invoke('get_font_size');
-    const unlisten = async () => await listen('font_size_change', () => {
+    const unlisten = async () => await listen('font_change', () => {
         getFontSize().then(val => { setFontSize(val) });
     });
 

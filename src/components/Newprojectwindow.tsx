@@ -1,4 +1,5 @@
-import { closeNewProjectWindow, createProject } from "../data/Projectwindowhelper";
+import { createProject } from "../data/Projectwindowhelper";
+import { closePopup } from "../data/Popuphelper";
 import { useState } from "react";
 function Newprojectwindow() {
   const [name, setName] = useState("");
@@ -7,7 +8,7 @@ function Newprojectwindow() {
       <div className="bg-gray-200 w-96 h-48 rounded-lg ">
         <div className="w-full flex justify-center p-4 border-b-2 border-solid border-gray-300">
           <h2 className="flex-grow text-left text-xl font-semibold "> New Project </h2>
-          <button onClick={closeNewProjectWindow} className="flex-shrink bg-gray-500 text-blue-50 font-semibold rounded px-2">X</button>
+          <button onClick={closePopup} className="flex-shrink bg-gray-500 text-blue-50 font-semibold rounded px-2">X</button>
         </div>
         <div className="px-8 mt-4 flex flex-col gap-2">
           <h3 className="text-center font-semibold">Enter a project name</h3>

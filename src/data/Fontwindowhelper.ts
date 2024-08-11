@@ -1,9 +1,5 @@
 import { invoke } from "@tauri-apps/api";
 
-export async function closeFontWindow() {
-    await invoke("close_font_window");
-}
-
 export const addFontSize = async () => {
     await invoke('add_font_size');
 }

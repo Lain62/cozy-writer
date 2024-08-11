@@ -10,22 +10,18 @@ function Popup() {
   const listenFontWindowOpen = async () => await listen('open_font_window', () => {
     setWindowState(PopupWindowState.FontSettings)
   });
-  const listenFontWindowClose = async () => await listen('close_font_window', () => {
-    setWindowState(PopupWindowState.None)
-  });
 
   const listenNewProjectWindowOpen = async () => await listen('open_new_project_window', () => {
     setWindowState(PopupWindowState.NewProject)
   });
-  const listenNewProjectWindowClose = async () => await listen('close_new_project_window', () => {
+  const listenPopupClose = async () => await listen('close_popup', () => {
     setWindowState(PopupWindowState.None)
   });
 
   useEffect(() => {
     listenFontWindowOpen()
-    listenFontWindowClose()
     listenNewProjectWindowOpen()
-    listenNewProjectWindowClose()
+    listenPopupClose()
   }, [])
 
   switch (windowState) {
