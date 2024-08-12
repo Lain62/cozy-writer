@@ -10,8 +10,6 @@ function Openprojectwindow() {
     const setOpened = useProjectStore(state => state.setOpenedProjectName);
 
     const openProject = (name: string) => {
-        console.log("hello i am trying to apply");
-
         setProject(name);
         setOpened(name);
 
