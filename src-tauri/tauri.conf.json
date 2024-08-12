@@ -17,7 +17,8 @@
         "all": true,
         "scope": [
           "$DOCUMENT/Cozy Writer",
-          "$DOCUMENT/Cozy Writer/*"
+          "$DOCUMENT/Cozy Writer/*",
+          "$DOCUMENT/Cozy Writer/**/*"
         ]
       }
     },

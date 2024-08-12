@@ -1,5 +1,6 @@
 import Fontwindow from "./Fontwindow";
 import Newprojectwindow from "./Newprojectwindow";
+import Openprojectwindow from "./Openprojectwindow";
 import { listen } from "@tauri-apps/api/event";
 import { PopupWindowState } from "../data/Popuphelper";
 import { useState, useEffect } from "react";
@@ -14,11 +15,17 @@ function Popup() {
   const listenNewProjectWindowOpen = async () => await listen('open_new_project_window', () => {
     setWindowState(PopupWindowState.NewProject)
   });
+
+  const listenOpenProjectWindowOpen = async () => await listen('open_open_project_window', () => {
+    setWindowState(PopupWindowState.OpenProject)
+  });
+
   const listenPopupClose = async () => await listen('close_popup', () => {
     setWindowState(PopupWindowState.None)
   });
 
   useEffect(() => {
+    listenOpenProjectWindowOpen()
     listenFontWindowOpen()
     listenNewProjectWindowOpen()
     listenPopupClose()
@@ -36,6 +43,10 @@ function Popup() {
     case PopupWindowState.NewProject:
       return (
         <Newprojectwindow />
+      )
+    case PopupWindowState.OpenProject:
+      return (
+        <Openprojectwindow />
       )
     default:
       return (

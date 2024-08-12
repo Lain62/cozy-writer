@@ -1,8 +1,13 @@
 import { createProject } from "../data/Projectwindowhelper";
 import { closePopup } from "../data/Popuphelper";
 import { useState } from "react";
+import { useProjectStore } from "../store/Projectstore";
 function Newprojectwindow() {
   const [name, setName] = useState("");
+
+  const setProject = useProjectStore(state => state.setProjectName);
+  const setOpened = useProjectStore(state => state.setOpenedProjectName);
+
   return (
     <div className="bg-black/50 w-screen h-screen absolute flex justify-center items-center">
       <div className="bg-gray-200 w-96 h-48 rounded-lg ">
@@ -13,7 +18,7 @@ function Newprojectwindow() {
         <div className="px-8 mt-4 flex flex-col gap-2">
           <h3 className="text-center font-semibold">Enter a project name</h3>
           <input value={name} onChange={e => setName(e.target.value)} className="w-full text-center h-8 outline-none px-2 rounded shadow-black bg-gray-50"></input>
-          <button onClick={() => { createProject(name); closeNewProjectWindow() }} className="flex-shrink bg-gray-500 text-blue-50 font-semibold rounded px-2">Create</button>
+          <button onClick={() => { createProject(name); setProject(name); setOpened(name); closePopup(); }} className="flex-shrink bg-gray-500 text-blue-50 font-semibold rounded px-2">Create</button>
         </div>
       </div>
     </div>
